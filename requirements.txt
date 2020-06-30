@@ -1,0 +1,5 @@
+DateTime==4.3
+Flask==1.1.1
+asyncio==3.4.3
+redis==3.5.3
+websockets==8.1
