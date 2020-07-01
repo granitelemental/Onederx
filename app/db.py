@@ -37,22 +37,6 @@ class Data():
         ]
         return res
 
-    def get_all(self):
-        res = self.conn.zrangebyscore("alarm", "-inf", "+inf", withscores=True)
-        res = [
-            {
-                "description": r[0].decode().split(":")[0],
-                "date": r[1]
-            } for i, r in enumerate(res)
-        ]
-        return res
-
-
-    def clear_db(self):
-        self.conn.flushdb()
-        res = "db is cleared"
-        return res
-
 
     def check_if_time(self):
         current_time = self.current_time()

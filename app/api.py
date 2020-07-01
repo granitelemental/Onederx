@@ -14,21 +14,9 @@ def add_alarm():
     return {"status": "Ok", "data": res}, 200
 
 
-@app.route('/alarm/active', methods=["GET"])
+@app.route('/alarm', methods=["GET"])
 def get_active():
     res = data.get_active()
-    return {"status": "Ok", "data": res}, 200
-
-
-@app.route('/alarm/all', methods=["GET"])
-def get_all():
-    res = data.get_all()
-    return {"status": "Ok", "data": res}, 200
-
-
-@app.route("/db", methods=["DELETE"])
-def clear_db():
-    res = data.clear_db()
     return {"status": "Ok", "data": res}, 200
 
 
