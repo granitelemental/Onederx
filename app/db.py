@@ -15,11 +15,11 @@ class Data():
 
     def save(self, data):
         date, description = data["date"], data["description"]
-        data = {
+        res = {
             f'{description}:{date}': date
         }
-        self.conn.zadd("alarm", data)
-        return {"status": "data added", "data": data}, 200
+        self.conn.zadd("alarm", res)
+        return res
         
 
     def current_time(self):
@@ -35,12 +35,23 @@ class Data():
                 "date": r[1]
             } for i, r in enumerate(res)
         ]
-        return {"status": "Ok", "data": res}, 200
+        return res
+
+    def get_all(self):
+        res = self.conn.zrangebyscore("alarm", "-inf", "+inf", withscores=True)
+        res = [
+            {
+                "description": r[0].decode().split(":")[0],
+                "date": r[1]
+            } for i, r in enumerate(res)
+        ]
+        return res
 
 
     def clear_db(self):
         self.conn.flushdb()
-        return {"status": "db is cleared"}, 200
+        res = "db is cleared"
+        return res
 
 
     def check_if_time(self):
@@ -48,6 +59,6 @@ class Data():
         res = self.conn.zrangebyscore("alarm", current_time, current_time, withscores=True)
         if res:
             return {
-                    "description": res[0][0].decode().split(":")[0],
-                    "date": res[0][1]
+                "description": res[0][0].decode().split(":")[0],
+                "date": res[0][1]
             }

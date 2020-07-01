@@ -15,14 +15,8 @@ async def send_time(websocket, path):
     while True:
         time = json.dumps(data.current_time(), indent=4)
         res = data.check_if_time()
-        msg = ""
-        if res:
-            res = json.dumps(res, indent=4)
-            await websocket.send(res)
-        else:
-            msg = " It's not time yet"
-
-        await websocket.send("Now: " + time + msg)
+        msg = json.dumps({"Now": time, "alarm": res}, indent=4)
+        await websocket.send(msg)
         await asyncio.sleep(1)
 
 
