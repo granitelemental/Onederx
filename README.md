@@ -28,16 +28,9 @@
 }
 ```
 
-4) Websocket server. Sends messages to a client connected to `SOCKET_HOST` and `SOCKET_PORT` from `docker-compose.yml` (default `SOCKET_HOST=0.0.0.0, SOCKET_PORT=3000`) each 1 second.
+4) Websocket server. Sends messages to a client connected to `SOCKET_HOST` and `SOCKET_PORT` from `docker-compose.yml` (default `SOCKET_HOST=0.0.0.0, SOCKET_PORT=3000`) if it's alarm time.
 
-Default message example:
-```
-{
-    "Now": "1593692914.0",
-    "alarm": null
-}
-```
-Alarm message example:
+Message example:
 ```
 {
     "Now": "1593692986.0",
