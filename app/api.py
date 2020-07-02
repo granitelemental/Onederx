@@ -6,6 +6,7 @@ from db import Data
 app = Flask('API')
 data = Data()
 
+
 @app.route('/alarm', methods=["POST"])
 def add_alarm():
 
@@ -21,7 +22,8 @@ def get_active():
 
 
 def start_app():
-    app.run(host=config.API_HOST, port=config.API_PORT , debug=True)
+    app.run(host=config.API_HOST, port=config.API_PORT, debug=True)
+
 
 if __name__ == "__main__":
     start_app()
